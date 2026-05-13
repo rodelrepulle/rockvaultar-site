@@ -15,14 +15,14 @@
 <body>
   <p><a href="../">← RockVaultAR</a></p>
   <h1>Privacy Policy</h1>
-  <p class="meta">Effective date: 8 May 2026 · Last updated: 8 May 2026</p>
+  <p class="meta">Effective date: 11 May 2026 · Last updated: 11 May 2026</p>
 
   <p>This Privacy Policy describes how RockVaultAR ("we," "our," or "the app") collects, uses, and protects your information when you use the RockVaultAR mobile application.</p>
 
   <h2>1. Information we collect</h2>
   <ul>
     <li><strong>Account information.</strong> When you sign in, we collect your email address and a Supabase-issued user ID. Sign in with Apple may provide a relayed email.</li>
-    <li><strong>Rock photos and identifications.</strong> Photos you scan are sent to our identification service to identify the specimen. Identified specimens (image, name, notes, tags, AR overlay configuration, optional location) are stored in your private vault and synced to your account.</li>
+    <li><strong>Rock photos and identifications.</strong> Photos you scan are sent to our identification service to identify the specimen. The photo is forwarded to Google's Gemini API for classification (see Section 3) and is not retained on our servers after the identification response is returned. Identified specimens (image, name, notes, tags, AR overlay configuration, optional location) are stored in your private vault and synced to your account.</li>
     <li><strong>Optional location.</strong> If you grant location permission, the latitude/longitude where a specimen was found is stored alongside that specimen. You can disable this in iOS Settings at any time.</li>
     <li><strong>Subscription status.</strong> Apple sends us your subscription tier (free, monthly, annual, lifetime) so we can unlock premium features. We never see your credit card or Apple ID password.</li>
     <li><strong>Diagnostic logs.</strong> We log non-personal events on-device (using Apple's OSLog) to diagnose crashes and bugs. These logs stay on your device unless you choose to share them.</li>
@@ -37,11 +37,13 @@
   </ul>
 
   <h2>3. Third parties we use</h2>
+  <p>The following third-party service providers receive data from RockVaultAR for the purposes described:</p>
   <ul>
-    <li><strong>Supabase</strong> (database, authentication, file storage, server-side identification function).</li>
-    <li><strong>Apple</strong> (Sign in with Apple, App Store payments, push notifications, iCloud-style infrastructure).</li>
+    <li><strong>Supabase</strong> (Supabase Inc., processed in Canada) — database, authentication, file storage, and the server-side identification function. Receives your email address, user ID, vault data, and (transiently) the photo bytes you scan. <a href="https://supabase.com/privacy">Privacy policy</a>.</li>
+    <li><strong>Google LLC — Gemini API</strong> (processed in the United States) — performs the rock/mineral classification on each scanned photo. Our identification Edge Function forwards the photo (downscaled to a maximum of 1568 pixels on the longest edge) and a fixed identification prompt to Google's Generative Language API ("Gemini 2.5 Flash"); Google returns a structured JSON classification. We do not send your account identifier, email, or location to Google. Per Google's API terms, photos sent to the paid Gemini API are not used to train Google's models. <a href="https://policies.google.com/privacy">Google Privacy Policy</a> · <a href="https://ai.google.dev/gemini-api/terms">Gemini API Additional Terms</a>.</li>
+    <li><strong>Apple</strong> (Apple Inc.) — Sign in with Apple, App Store payments, push notifications, and platform-level services. Apple's handling of these interactions is covered by Apple's own privacy policy.</li>
   </ul>
-  <p>We do not sell, rent, or share your personal information with advertisers or data brokers.</p>
+  <p>We do not sell, rent, or share your personal information with advertisers or data brokers. RockVaultAR does not bundle any third-party advertising or analytics SDK.</p>
 
   <h2>4. Data retention</h2>
   <p>Your account and vault data are retained until you delete your account. When you delete your account from <em>Settings → Delete Account</em>, your authentication record is removed and associated data is removed via cascading database deletion. Server backups containing prior snapshots are rotated within 30 days.</p>
@@ -61,7 +63,7 @@
   <p>Data in transit is encrypted using HTTPS/TLS. Authentication tokens are stored in the iOS Keychain. Server-side data is stored on Supabase infrastructure with row-level security.</p>
 
   <h2>8. International transfers</h2>
-  <p>Our backend is hosted in Canada (Central). If you access RockVaultAR from another country, your data will be transferred to and processed there.</p>
+  <p>Our backend is hosted in Canada (Central). Photo classifications are processed by Google's Gemini API in the United States. If you access RockVaultAR from another country, your data will be transferred to and processed in these locations.</p>
 
   <h2>9. Changes</h2>
   <p>We may update this policy from time to time. Material changes will be highlighted in-app on next launch.</p>
